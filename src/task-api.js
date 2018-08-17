@@ -18,6 +18,10 @@ class TaskAPI {
     }
   }
 
+  getLastTaskOfProject (project) {
+    return this.tasks[this.tasks[project].length - 1]
+  }
+
   addTask (input, createProject) {
     if (!input[0].startsWith('@')) {
       render.logError(
@@ -26,15 +30,16 @@ class TaskAPI {
       return
     }
     const project = input[0].slice(1)
-    input.shift()
-    const message = input.join(' ')
-    const task = new Task({ message, project })
     if (!this.tasks[project] && createProject) {
       this.tasks[project] = []
     } else if (!this.tasks[project] && !createProject) {
       render.logError(`There are no projects named ${project}`)
       return
     }
+    input.shift()
+    const message = input.join(' ')
+    const id = this.getLastTaskOfProject(project)
+    const task = new Task({ id, message, project })
     this.tasks[project].push(task)
     this.save()
   }
