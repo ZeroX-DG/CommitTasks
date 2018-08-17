@@ -1,6 +1,6 @@
 const signale = require('signale')
 const { grey, underline, blue } = require('chalk')
-const { log, success, pending } = signale
+const { log, success, pending, fatal } = signale
 
 signale.config({ displayLabel: false })
 
@@ -33,6 +33,10 @@ class Render {
         }
       })
     })
+  }
+
+  logError (error) {
+    fatal({ prefix: '  ', message: `${error.message}` })
   }
 }
 
