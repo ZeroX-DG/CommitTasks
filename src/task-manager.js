@@ -1,20 +1,16 @@
 const render = require('./render')
-const fs = require('fs')
-const os = require('os')
-const path = require('path')
+const TaskAPI = require('./task-api')
 
 const TaskManager = (flags, input) => {
-  let task = []
+  let api = null
   try {
-    const dataPath = path.join(os.homedir(), '.commit-tasks.json')
-    if (!fs.existsSync(dataPath)) {
-      fs.writeFileSync(dataPath, '[]')
-    }
-    task = JSON.parse(fs.readFileSync(dataPath))
+    api = new TaskAPI()
   } catch (error) {
     render.logError(error)
   }
-  return render.drawTaskList(task)
+  if (flags.task) {
+  }
+  return render.drawTaskList(api.tasks)
 }
 
 module.exports = TaskManager
