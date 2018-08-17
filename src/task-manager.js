@@ -7,6 +7,9 @@ const TaskManager = (flags, input) => {
   let task = []
   try {
     const dataPath = path.join(os.homedir(), '.commit-tasks.json')
+    if (!fs.existsSync(dataPath)) {
+      fs.writeFileSync(dataPath, '[]')
+    }
     task = JSON.parse(fs.readFileSync(dataPath))
   } catch (error) {
     render.logError(error)
