@@ -31,7 +31,7 @@ class TaskAPI {
     const task = new Task({ message, project })
     if (!this.tasks[project] && createProject) {
       this.tasks[project] = []
-    } else {
+    } else if (!this.tasks[project] && !createProject) {
       render.logError(`There are no projects named ${project}`)
       return
     }
