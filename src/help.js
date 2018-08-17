@@ -7,7 +7,7 @@ module.exports = `
       --task, -t        Create task
       --remove, -rm     Remove a task
       --commit, -c      Commit a task
-      --list, -l        Display all tasks in projects
+      --list, -l        Display all tasks in a project
       --find, -f        Search for a task
       --move, -m        Move task between projects or up/down in current project
       --edit, -e        Edit a task commit's message
