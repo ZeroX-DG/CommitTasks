@@ -4,7 +4,7 @@ const TaskManager = (flags, input) => {
   const api = new TaskAPI()
 
   if (flags.task) {
-    api.addTask(input)
+    return api.addTask(input, flags.create)
   }
 
   return api.drawTaskList()

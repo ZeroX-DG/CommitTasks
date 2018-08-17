@@ -21,14 +21,14 @@ class Render {
   }
 
   drawTaskList (tasks) {
-    tasks = Object.keys(tasks)
+    const projects = Object.keys(tasks)
     if (tasks.length === 0) {
       return log({
         prefix: '  ',
         message: underline(blue('No task to display!'))
       })
     }
-    tasks.forEach(project => {
+    projects.forEach(project => {
       const currentProject = tasks[project]
       log(this._buildProjectTitle(project, tasks[project]))
       currentProject.forEach(task => {

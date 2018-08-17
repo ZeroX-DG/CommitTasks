@@ -6,11 +6,11 @@ const render = require('./render')
 
 class TaskAPI {
   constructor () {
-    this.tasks = []
+    this.tasks = {}
     this.dataPath = path.join(os.homedir(), '.commit-tasks.json')
     try {
       if (!fs.existsSync(this.dataPath)) {
-        fs.writeFileSync(this.dataPath, '[]')
+        fs.writeFileSync(this.dataPath, '{}')
       }
       this.tasks = JSON.parse(fs.readFileSync(this.dataPath))
     } catch (error) {
@@ -18,18 +18,24 @@ class TaskAPI {
     }
   }
 
-  addTask (input) {
+  addTask (input, createProject) {
     if (!input[0].startsWith('@')) {
       render.logError(
         'Wrong add task command syntax. Type --help for more info'
       )
       return
     }
-    const project = input[0]
+    const project = input[0].slice(1)
     input.shift()
     const message = input.join(' ')
     const task = new Task({ message, project })
-    this.tasks.push(task)
+    if (!this.tasks[project] && createProject) {
+      this.tasks[project] = []
+    } else {
+      render.logError(`There are no projects named ${project}`)
+      return
+    }
+    this.tasks[project].push(task)
     this.save()
   }
 
