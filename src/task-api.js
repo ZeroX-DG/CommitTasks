@@ -38,7 +38,7 @@ class TaskAPI {
     }
     input.shift()
     const message = input.join(' ')
-    const id = this.getLastTaskOfProject(project)
+    const id = this.getLastTaskOfProject(project) || 1
     const task = new Task({ id, message, project })
     this.tasks[project].push(task)
     this.save()
