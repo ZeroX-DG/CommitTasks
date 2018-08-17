@@ -43,7 +43,8 @@ class Render {
   }
 
   logError (error) {
-    fatal({ prefix: '  ', message: `${error.message}` })
+    error = typeof error === 'string' ? error : error.message
+    fatal({ prefix: '  ', message: `${error}` })
   }
 }
 

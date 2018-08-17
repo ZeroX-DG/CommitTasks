@@ -2,6 +2,7 @@ const fs = require('fs')
 const os = require('os')
 const path = require('path')
 const Task = require('./task')
+const render = require('./render')
 
 class TaskAPI {
   constructor () {
@@ -13,18 +14,35 @@ class TaskAPI {
       }
       this.tasks = JSON.parse(fs.readFileSync(this.dataPath))
     } catch (error) {
-      throw error
+      render.logError(error)
     }
   }
 
-  addTask (message, project) {
+  addTask (input) {
+    if (!input[0].startsWith('@')) {
+      render.logError(
+        'Wrong add task command syntax. Type --help for more info'
+      )
+      return
+    }
+    const project = input[0]
+    input.shift()
+    const message = input.join(' ')
     const task = new Task({ message, project })
     this.tasks.push(task)
     this.save()
   }
 
+  drawTaskList () {
+    render.drawTaskList(this.tasks)
+  }
+
   save () {
-    fs.writeFileSync(this.dataPath, JSON.stringify(this.tasks))
+    try {
+      fs.writeFileSync(this.dataPath, JSON.stringify(this.tasks))
+    } catch (error) {
+      render.logError(error)
+    }
   }
 }
 
