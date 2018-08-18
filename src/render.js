@@ -1,5 +1,5 @@
 const signale = require('signale')
-const { grey, underline, blue, red } = require('chalk')
+const { grey, underline, blue, red, green } = require('chalk')
 const { log, success, pending, fatal } = signale
 
 signale.config({ displayLabel: false })
@@ -48,7 +48,7 @@ class Render {
   }
 
   logSuccess (message) {
-    success({ prefix: '  ', message })
+    success({ prefix: '  ', message: green(message) })
   }
 }
 
