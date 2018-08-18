@@ -46,6 +46,10 @@ class Render {
     error = typeof error === 'string' ? error : error.message
     fatal({ prefix: '  ', message: `${error}` })
   }
+
+  logSuccess (message) {
+    success({ prefix: '  ', message })
+  }
 }
 
 module.exports = new Render()

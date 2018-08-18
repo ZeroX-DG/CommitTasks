@@ -42,6 +42,7 @@ class TaskAPI {
     const task = new Task({ id, message, project })
     this.tasks[project].push(task)
     this.save()
+    render.logSuccess(`Created task ${message}`)
   }
 
   drawTaskList () {
