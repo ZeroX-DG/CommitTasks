@@ -115,8 +115,6 @@ class TaskAPI {
       return render.logError('Task id is not a number')
     }
     const task = this.tasks[project].find(task => task.id === taskId)
-    task.finished = true
-    this.save()
     git
       .commit(task.message)
       .then(() => {
@@ -125,6 +123,8 @@ class TaskAPI {
           .getLastCommitDetails()
           .then(detail => {
             render.log(detail)
+            task.finished = true
+            this.save()
           })
           .catch(err => {
             render.logError(err)
