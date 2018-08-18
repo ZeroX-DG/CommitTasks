@@ -4,7 +4,9 @@ function commit (message) {
   const commitCommand = `git add . && git commit -m "${message}"`
   return new Promise((resolve, reject) => {
     exec(commitCommand, (error, stdout, stderr) => {
-      if (error) {
+      if (stderr) {
+        reject(stderr)
+      } else if (error) {
         reject(error)
       } else {
         resolve()
