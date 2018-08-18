@@ -211,7 +211,7 @@ class TaskAPI {
   edit (input) {
     const project = this.getProject(input)
     const taskId = parseInt(input[1])
-    const newMessage = input.slice(2)
+    const newMessage = input.slice(2).join(' ')
     if (!taskId) {
       return render.logError(getMessage(errors.INVALID_TASK_ID_TYPE))
     }
