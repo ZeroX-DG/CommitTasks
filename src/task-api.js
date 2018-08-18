@@ -99,6 +99,13 @@ class TaskAPI {
     render.logSuccess(`Removed task ${taskId} in @${project}`)
   }
 
+  /**
+   *Commit a task in a project
+   *
+   * @param {*} input
+   * @returns
+   * @memberof TaskAPI
+   */
   commitTask (input) {
     const project = input[0]
     let taskId = input[1]
