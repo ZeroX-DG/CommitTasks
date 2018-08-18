@@ -3,6 +3,7 @@ const os = require('os')
 const path = require('path')
 const Task = require('./task')
 const render = require('./render')
+const git = require('./git-api')
 
 class TaskAPI {
   /**
@@ -96,6 +97,42 @@ class TaskAPI {
     })
     this.save()
     render.logSuccess(`Removed task ${taskId} in @${project}`)
+  }
+
+  commitTask (input) {
+    const project = input[0]
+    let taskId = input[1]
+    // check if the input task id is a number
+    try {
+      taskId = parseInt(taskId)
+      // then check if the input task id is exists in the project task list
+      if (!this.tasks[project].some(task => task.id === taskId)) {
+        return render.logError(
+          `There is no task with the id ${taskId} in @${project}`
+        )
+      }
+    } catch (error) {
+      return render.logError('Task id is not a number')
+    }
+    const task = this.tasks[project].find(task => task.id === taskId)
+    task.finished = true
+    this.save()
+    git
+      .commit(task.message)
+      .then(() => {
+        render.logSuccess(`Commited task ${taskId} in @${project}`)
+        git
+          .getLastCommitDetails()
+          .then(detail => {
+            render.log(detail)
+          })
+          .catch(err => {
+            render.logError(err)
+          })
+      })
+      .catch(err => {
+        render.logError(err)
+      })
   }
 
   /**

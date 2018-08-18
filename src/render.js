@@ -50,6 +50,10 @@ class Render {
   logSuccess (message) {
     success({ prefix: '  ', message: green(message) })
   }
+
+  log (message) {
+    log({ prefix: '  ', message: message.trim() })
+  }
 }
 
 module.exports = new Render()

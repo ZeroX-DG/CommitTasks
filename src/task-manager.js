@@ -11,6 +11,10 @@ const TaskManager = (flags, input) => {
     return api.removeTask(input)
   }
 
+  if (flags.commit) {
+    return api.commitTask(input)
+  }
+
   return api.drawTaskList()
 }
 
