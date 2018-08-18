@@ -33,10 +33,6 @@ const cli = meow(help, {
       type: 'boolean',
       alias: 'f'
     },
-    move: {
-      type: 'boolean',
-      alias: 'm'
-    },
     edit: {
       type: 'boolean',
       alias: 'e'
