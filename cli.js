@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const meow = require('meow')
 const help = require('./src/help')
 const TaskManager = require('./src/task-manager')
