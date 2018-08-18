@@ -4,9 +4,7 @@ function commit (message) {
   const commitCommand = `git add . && git commit -m "${message}"`
   return new Promise((resolve, reject) => {
     exec(commitCommand, (error, stdout, stderr) => {
-      if (stderr) {
-        reject(stderr)
-      } else if (error) {
+      if (error) {
         reject(error)
       } else {
         resolve()
@@ -29,7 +27,21 @@ function getLastCommitDetails () {
   })
 }
 
+function isNothingtoCommit () {
+  const nothingToCommitCommand = 'git status --porcelain'
+  return new Promise((resolve, reject) => {
+    exec(nothingToCommitCommand, (error, stdout, stderr) => {
+      if (error) {
+        reject(error)
+      } else {
+        resolve(!stdout.match(/[a-z]/i))
+      }
+    })
+  })
+}
+
 module.exports = {
   commit,
-  getLastCommitDetails
+  getLastCommitDetails,
+  isNothingtoCommit
 }

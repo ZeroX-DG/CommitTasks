@@ -81,16 +81,19 @@ class TaskAPI {
     const project = input[0]
     let taskId = input[1]
     // check if the input task id is a number
-    try {
-      taskId = parseInt(taskId)
-      // then check if the input task id is exists in the project task list
-      if (!this.tasks[project].some(task => task.id === taskId)) {
-        return render.logError(
-          `There is no task with the id ${taskId} in @${project}`
-        )
-      }
-    } catch (error) {
+    taskId = parseInt(taskId)
+    if (!taskId) {
       return render.logError('Task id is not a number')
+    }
+    // then check if the project exists
+    if (!this.tasks[project]) {
+      return render.logError(`Project ${project} doesn't exist!`)
+    }
+    // then check if the input task id is exists in the project task list
+    if (!this.tasks[project].some(task => task.id === taskId)) {
+      return render.logError(
+        `There is no task with the id ${taskId} in @${project}`
+      )
     }
     this.tasks[project] = this.tasks[project].filter(task => {
       return task.id !== taskId
@@ -112,22 +115,33 @@ class TaskAPI {
     const task = this.getTask(project, taskId)
     if (task) {
       git
-        .commit(task.message)
-        .then(() => {
-          render.logSuccess(`Commited task ${taskId} in @${project}`)
-          git
-            .getLastCommitDetails()
-            .then(detail => {
-              render.log(detail)
-              task.finished = true
-              this.save()
-            })
-            .catch(err => {
-              render.logError(err)
-            })
+        .isNothingtoCommit()
+        .then(nothingToCommit => {
+          if (nothingToCommit) {
+            render.logError('No changes to commit!')
+          } else {
+            git
+              .commit(task.message)
+              .then(() => {
+                render.logSuccess(`Commited task ${taskId} in @${project}`)
+                git
+                  .getLastCommitDetails()
+                  .then(detail => {
+                    render.log(detail)
+                    task.finished = true
+                    this.save()
+                  })
+                  .catch(err => {
+                    render.logError(err)
+                  })
+              })
+              .catch(err => {
+                render.logError(err)
+              })
+          }
         })
-        .catch(err => {
-          render.logError(err)
+        .catch(error => {
+          render.logError(error)
         })
     }
   }
@@ -142,9 +156,8 @@ class TaskAPI {
    */
   getTask (project, taskId) {
     // check if the input task id is a number
-    try {
-      taskId = parseInt(taskId)
-    } catch (error) {
+    taskId = parseInt(taskId)
+    if (!taskId) {
       return render.logError('Task id is not a number')
     }
     // then check if the project exists
