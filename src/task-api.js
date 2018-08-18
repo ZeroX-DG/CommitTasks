@@ -147,6 +147,10 @@ class TaskAPI {
     } catch (error) {
       return render.logError('Task id is not a number')
     }
+    // then check if the project exists
+    if (!this.tasks[project]) {
+      return render.logError(`Project ${project} doesn't exist!`)
+    }
     // then check if the input task id is exists in the project task list
     if (!this.tasks[project].some(task => task.id === taskId)) {
       return render.logError(
