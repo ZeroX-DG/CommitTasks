@@ -46,9 +46,22 @@ class TaskAPI {
 
   removeTask (input) {
     const project = input[0]
-    const taskId = input[1]
-    this.tasks[project] = this.tasks[project].filter(task => task.id !== taskId)
+    let taskId = input[1]
+    try {
+      taskId = parseInt(taskId)
+      if (!this.tasks[project].some(task => task.id === taskId)) {
+        return render.logError(
+          `There is no task with the id ${taskId} in @${project}`
+        )
+      }
+    } catch (error) {
+      return render.logError('Task id is not a number')
+    }
+    this.tasks[project] = this.tasks[project].filter(task => {
+      return task.id !== taskId
+    })
     this.save()
+    render.logSuccess(`Removed task ${taskId} in @${project}`)
   }
 
   save () {

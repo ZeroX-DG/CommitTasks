@@ -1,5 +1,5 @@
 const signale = require('signale')
-const { grey, underline, blue } = require('chalk')
+const { grey, underline, blue, red } = require('chalk')
 const { log, success, pending, fatal } = signale
 
 signale.config({ displayLabel: false })
@@ -44,7 +44,7 @@ class Render {
 
   logError (error) {
     error = typeof error === 'string' ? error : error.message
-    fatal({ prefix: '  ', message: `${error}` })
+    fatal({ prefix: '  ', message: `${red(error)}` })
   }
 
   logSuccess (message) {
