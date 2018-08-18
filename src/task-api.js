@@ -4,8 +4,8 @@ const path = require('path')
 const Task = require('./task')
 const render = require('./render')
 const git = require('./git-api')
-const util = require('./util')
-const { getMessage, errors, success } = util
+const messages = require('./messages')
+const { getMessage, errors, success } = messages
 
 class TaskAPI {
   /**
