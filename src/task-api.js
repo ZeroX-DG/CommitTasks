@@ -64,7 +64,7 @@ class TaskAPI {
     const task = new Task({ id, message, project })
     this.tasks[project].push(task)
     this.save()
-    render.logSuccess(`Created task ${message}`)
+    render.logSuccess(getMessage(success.CREATED_TASK, message))
   }
 
   /**
@@ -123,18 +123,20 @@ class TaskAPI {
     const task = this.getTask(project, taskId)
     if (task) {
       if (task.finished) {
-        return render.logError("You can't commit a finished task")
+        return render.logError(getMessage(errors.COMMIT_FINISHED_TASK))
       }
       git
         .isNothingtoCommit()
         .then(nothingToCommit => {
           if (nothingToCommit) {
-            render.logError('No changes to commit!')
+            render.logError(getMessage(errors.NOTHING_TO_COMMIT))
           } else {
             git
               .commit(task.message)
               .then(() => {
-                render.logSuccess(`Commited task ${taskId} in @${project}`)
+                render.logSuccess(
+                  getMessage(success.COMITTED_TASK, [taskId, project])
+                )
                 git
                   .getLastCommitDetails()
                   .then(detail => {
@@ -172,16 +174,16 @@ class TaskAPI {
     // check if the input task id is a number
     taskId = parseInt(taskId)
     if (!taskId) {
-      return render.logError('Task id is not a number')
+      return render.logError(getMessage(errors.INVALID_TASK_ID_TYPE))
     }
     // then check if the project exists
     if (!this.tasks[project]) {
-      return render.logError(`Project ${project} doesn't exist!`)
+      return render.logError(getMessage(errors.INVALID_PROJECT_NAME, project))
     }
     // then check if the input task id is exists in the project task list
     if (!this.tasks[project].some(task => task.id === taskId)) {
       return render.logError(
-        `There is no task with the id ${taskId} in @${project}`
+        getMessage(errors.NO_TASK_IN_PROJECT, [taskId, project])
       )
     }
     return this.tasks[project].find(task => task.id === taskId)
@@ -211,12 +213,12 @@ class TaskAPI {
     const taskId = parseInt(input[1])
     const newMessage = input.slice(2)
     if (!taskId) {
-      return render.logError('Task id is not a number')
+      return render.logError(getMessage(errors.INVALID_TASK_ID_TYPE))
     }
     if (project) {
       if (!this.tasks[project].some(task => task.id === taskId)) {
         return render.logError(
-          `There is no task with the id ${taskId} in @${project}`
+          getMessage(errors.NO_TASK_IN_PROJECT, [taskId, project])
         )
       }
       const task = this.tasks[project].find(task => task.id === taskId)
@@ -231,7 +233,7 @@ class TaskAPI {
       project = path.basename(process.cwd())
     }
     if (!this.tasks[project]) {
-      return render.logError(`Project ${project} doesn't exist!`)
+      return render.logError(getMessage(errors.INVALID_PROJECT_NAME, project))
     }
     return project
   }
