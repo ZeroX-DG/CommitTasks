@@ -227,6 +227,13 @@ class TaskAPI {
     }
   }
 
+  /**
+   *Get project name from user input
+   *
+   * @param {Array<String>} input
+   * @returns {String}
+   * @memberof TaskAPI
+   */
   getProject (input) {
     let project = input[0]
     if (project === '.') {
