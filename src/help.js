@@ -14,4 +14,16 @@ module.exports = `
 
     Examples:
       $ ct
+      $ ct --task MyProject Fix issue #45
+      $ ct --remove MyProject 1
+      $ ct --remove . 1
+      $ ct --commit MyProject 2
+      $ ct --commit . 2
+      $ ct --list MyProject
+      $ ct --list .
+      $ ct --find My task
+      $ ct --edit MyProject 2 New message
+      $ ct --edit . 2 New message
+      $ ct --task NotExistProject Fix issue #45 --create
+      $ ct --create --task NotExistProject Fix issue #45
 `
