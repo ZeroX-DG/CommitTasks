@@ -7,6 +7,10 @@ const TaskManager = (flags, input) => {
     return api.addTask(input, flags.create)
   }
 
+  if (flags.remove) {
+    return api.removeTask(input)
+  }
+
   return api.drawTaskList()
 }
 

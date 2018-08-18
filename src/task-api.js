@@ -23,13 +23,7 @@ class TaskAPI {
   }
 
   addTask (input, createProject) {
-    if (!input[0].startsWith('@')) {
-      render.logError(
-        'Wrong add task command syntax. Type --help for more info'
-      )
-      return
-    }
-    const project = input[0].slice(1)
+    const project = input[0]
     if (!this.tasks[project] && createProject) {
       this.tasks[project] = []
     } else if (!this.tasks[project] && !createProject) {
@@ -47,6 +41,13 @@ class TaskAPI {
 
   drawTaskList () {
     render.drawTaskList(this.tasks)
+  }
+
+  removeTask (input) {
+    const project = input[0]
+    const taskId = input[1]
+    this.tasks[project] = this.tasks[project].filter(task => task.id !== taskId)
+    this.save()
   }
 
   save () {
