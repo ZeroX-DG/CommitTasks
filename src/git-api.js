@@ -15,7 +15,7 @@ function commit (message) {
 
 function getLastCommitDetails () {
   const getOutputCommand =
-    'git log --format="%Cgreen%h%Creset %s %C(yellow)(%cr) %C(bold blue)<%an>%Creset" -n 1'
+    'git log --format="%Cgreen%h%Creset %s %C(bold blue)<%an>%Creset" -n 1'
   return new Promise((resolve, reject) => {
     exec(getOutputCommand, (error, stdout, stderr) => {
       if (error) {
