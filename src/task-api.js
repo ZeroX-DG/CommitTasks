@@ -42,7 +42,10 @@ class TaskAPI {
    * @memberof TaskAPI
    */
   addTask (input, createProject) {
-    const project = input[0]
+    let project = input[0]
+    if (project === '.') {
+      project = path.basename(process.cwd())
+    }
     // check if the user want to create a new project or it's just a typo
     if (!this.tasks[project] && createProject) {
       this.tasks[project] = []
@@ -78,8 +81,11 @@ class TaskAPI {
    * @memberof TaskAPI
    */
   removeTask (input) {
-    const project = input[0]
+    let project = input[0]
     let taskId = input[1]
+    if (project === '.') {
+      project = path.basename(process.cwd())
+    }
     // check if the input task id is a number
     taskId = parseInt(taskId)
     if (!taskId) {
@@ -158,6 +164,9 @@ class TaskAPI {
    * @memberof TaskAPI
    */
   getTask (project, taskId) {
+    if (project === '.') {
+      project = path.basename(process.cwd())
+    }
     // check if the input task id is a number
     taskId = parseInt(taskId)
     if (!taskId) {
