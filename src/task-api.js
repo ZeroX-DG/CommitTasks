@@ -114,6 +114,9 @@ class TaskAPI {
     let taskId = input[1]
     const task = this.getTask(project, taskId)
     if (task) {
+      if (task.finished) {
+        return render.logError("You can't commit a finished task")
+      }
       git
         .isNothingtoCommit()
         .then(nothingToCommit => {
