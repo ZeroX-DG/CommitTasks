@@ -109,19 +109,7 @@ class TaskAPI {
   commitTask (input) {
     const project = input[0]
     let taskId = input[1]
-    // check if the input task id is a number
-    try {
-      taskId = parseInt(taskId)
-      // then check if the input task id is exists in the project task list
-      if (!this.tasks[project].some(task => task.id === taskId)) {
-        return render.logError(
-          `There is no task with the id ${taskId} in @${project}`
-        )
-      }
-    } catch (error) {
-      return render.logError('Task id is not a number')
-    }
-    const task = this.tasks[project].find(task => task.id === taskId)
+    const task = this.getTask(project, taskId)
     git
       .commit(task.message)
       .then(() => {
@@ -140,6 +128,30 @@ class TaskAPI {
       .catch(err => {
         render.logError(err)
       })
+  }
+
+  /**
+   *Get a task in the task list
+   *
+   * @param {String} project
+   * @param {String || Number} taskId
+   * @returns
+   * @memberof TaskAPI
+   */
+  getTask (project, taskId) {
+    // check if the input task id is a number
+    try {
+      taskId = parseInt(taskId)
+      // then check if the input task id is exists in the project task list
+      if (!this.tasks[project].some(task => task.id === taskId)) {
+        return render.logError(
+          `There is no task with the id ${taskId} in @${project}`
+        )
+      }
+    } catch (error) {
+      return render.logError('Task id is not a number')
+    }
+    return this.tasks[project].find(task => task.id === taskId)
   }
 
   /**
