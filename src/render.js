@@ -22,10 +22,12 @@ class Render {
 
   drawTaskList (tasks) {
     const projects = Object.keys(tasks)
-    if (tasks.length === 0) {
+    if (projects.length === 0) {
       return log({
         prefix: '  ',
-        message: underline(blue('No task to display!'))
+        message: underline(
+          blue('No task to display! Use --help to get started')
+        )
       })
     }
     projects.forEach(project => {
