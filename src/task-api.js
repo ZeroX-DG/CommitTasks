@@ -224,6 +224,7 @@ class TaskAPI {
       const task = this.tasks[project].find(task => task.id === taskId)
       task.message = newMessage
       this.save()
+      render.logSuccess(getMessage(success.EDITTED_TASK, newMessage))
     }
   }
 
