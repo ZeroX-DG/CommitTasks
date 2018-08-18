@@ -185,6 +185,17 @@ class TaskAPI {
     return this.tasks[project].find(task => task.id === taskId)
   }
 
+  list (input) {
+    let project = input[0]
+    if (project === '.') {
+      project = path.basename(process.cwd())
+    }
+    if (!this.tasks[project]) {
+      return render.logError(`Project ${project} doesn't exist!`)
+    }
+    render.drawProjectTaskList(this.tasks, project)
+  }
+
   /**
    *Save the all tasks into the data file
    *

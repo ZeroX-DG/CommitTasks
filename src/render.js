@@ -42,6 +42,25 @@ class Render {
     })
   }
 
+  drawProjectTaskList (tasks, project) {
+    const projectTasks = tasks[project]
+    if (projectTasks.length === 0) {
+      return log({
+        prefix: '  ',
+        message: underline(blue('No task to display!'))
+      })
+    }
+    log(this._buildProjectTitle(project, projectTasks))
+    projectTasks.forEach(task => {
+      const output = this._buildTaskMessage(task)
+      if (task.finished) {
+        success(output)
+      } else {
+        pending(output)
+      }
+    })
+  }
+
   logError (error) {
     error = typeof error === 'string' ? error : error.message
     fatal({ prefix: '  ', message: `${red(error)}` })
