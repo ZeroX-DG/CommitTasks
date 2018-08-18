@@ -185,7 +185,45 @@ class TaskAPI {
     return this.tasks[project].find(task => task.id === taskId)
   }
 
+  /**
+   *List all tasks in a project
+   *
+   * @param {Array<String>} input
+   * @memberof TaskAPI
+   */
   list (input) {
+    let project = this.getProject(input)
+    if (project) {
+      render.drawProjectTaskList(this.tasks, project)
+    }
+  }
+
+  /**
+   *Edit task commit message
+   *
+   * @param {Array<String>} input
+   * @memberof TaskAPI
+   */
+  edit (input) {
+    const project = this.getProject(input)
+    const taskId = parseInt(input[1])
+    const newMessage = input.slice(2)
+    if (!taskId) {
+      return render.logError('Task id is not a number')
+    }
+    if (project) {
+      if (!this.tasks[project].some(task => task.id === taskId)) {
+        return render.logError(
+          `There is no task with the id ${taskId} in @${project}`
+        )
+      }
+      const task = this.tasks[project].find(task => task.id === taskId)
+      task.message = newMessage
+      this.save()
+    }
+  }
+
+  getProject (input) {
     let project = input[0]
     if (project === '.') {
       project = path.basename(process.cwd())
@@ -193,7 +231,7 @@ class TaskAPI {
     if (!this.tasks[project]) {
       return render.logError(`Project ${project} doesn't exist!`)
     }
-    render.drawProjectTaskList(this.tasks, project)
+    return project
   }
 
   /**

@@ -19,6 +19,10 @@ const TaskManager = (flags, input) => {
     return api.list(input)
   }
 
+  if (flags.edit) {
+    return api.edit(input)
+  }
+
   return api.drawTaskList()
 }
 
