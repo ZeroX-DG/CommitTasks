@@ -114,7 +114,6 @@ class TaskAPI {
    *Commit a task in a project
    *
    * @param {*} input
-   * @returns
    * @memberof TaskAPI
    */
   commitTask (input) {
@@ -164,7 +163,7 @@ class TaskAPI {
    *
    * @param {String} project
    * @param {String || Number} taskId
-   * @returns
+   * @returns {Object}
    * @memberof TaskAPI
    */
   getTask (project, taskId) {
