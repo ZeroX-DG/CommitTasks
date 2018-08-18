@@ -4,6 +4,8 @@ const path = require('path')
 const Task = require('./task')
 const render = require('./render')
 const git = require('./git-api')
+const util = require('./util')
+const { getMessage, errors, success } = util
 
 class TaskAPI {
   /**
@@ -50,7 +52,7 @@ class TaskAPI {
     if (!this.tasks[project] && createProject) {
       this.tasks[project] = []
     } else if (!this.tasks[project] && !createProject) {
-      render.logError(`There are no projects named ${project}`)
+      render.logError(getMessage(errors.INVALID_PROJECT_NAME, project))
       return
     }
     // remove the project name from the input array and the rest of it is
@@ -89,23 +91,23 @@ class TaskAPI {
     // check if the input task id is a number
     taskId = parseInt(taskId)
     if (!taskId) {
-      return render.logError('Task id is not a number')
+      return render.logError(getMessage(errors.INVALID_TASK_ID_TYPE))
     }
     // then check if the project exists
     if (!this.tasks[project]) {
-      return render.logError(`Project ${project} doesn't exist!`)
+      return render.logError(getMessage(errors.INVALID_PROJECT_NAME, project))
     }
     // then check if the input task id is exists in the project task list
     if (!this.tasks[project].some(task => task.id === taskId)) {
       return render.logError(
-        `There is no task with the id ${taskId} in @${project}`
+        getMessage(errors.NO_TASK_IN_PROJECT, [taskId, project])
       )
     }
     this.tasks[project] = this.tasks[project].filter(task => {
       return task.id !== taskId
     })
     this.save()
-    render.logSuccess(`Removed task ${taskId} in @${project}`)
+    render.logSuccess(getMessage(success.REMOVED_TASK, [taskId, project]))
   }
 
   /**
