@@ -9,7 +9,12 @@ class Render {
     const id = `${task.id}.`
     const prefix = `    ${grey(id)} `
     const message = task.finished ? grey(task.message) : task.message
-    const suffix = grey('2d')
+    const taskCreateDate = new Date(task.createAt)
+    const now = new Date()
+    const timeDiff = Math.abs(now.getTime() - taskCreateDate.getTime())
+    const diffDays = Math.floor(timeDiff / (1000 * 3600 * 24))
+    const displayDay = diffDays ? `${diffDays}d` : 'today'
+    const suffix = `- ${green(displayDay)}`
     return { prefix, message, suffix }
   }
 
