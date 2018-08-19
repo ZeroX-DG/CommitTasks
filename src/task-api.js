@@ -147,7 +147,7 @@ class TaskAPI {
               .commit(task.message)
               .then(() => {
                 render.logSuccess(
-                  getMessage(success.COMITTED_TASK, [taskId, project])
+                  getMessage(success.COMITTED_TASK, [taskId, task.project])
                 )
                 git
                   .getLastCommitDetails()
