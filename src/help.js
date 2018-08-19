@@ -5,7 +5,7 @@ module.exports = `
     Options:
         none            Display all tasks
       --task, -t        Create task
-      --remove, -rm     Remove a task
+      --remove, -rm     Remove a task or a project
       --commit, -c      Commit a task
       --list, -l        Display all tasks in a project
       --find, -f        Search for a task
