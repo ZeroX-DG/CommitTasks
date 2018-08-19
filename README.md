@@ -11,7 +11,7 @@
 ## About this project
 
 CommitTasks is a small, robust cli for developers to plan and manage their git commits in multiple projects.
-With just a few example, the users can plan, prepare and commit their changes with confident.
+With just a few examples, the users can learn to plan, prepare and commit their changes with confident.
 
 ## Features
 
