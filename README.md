@@ -18,6 +18,7 @@ With just a few examples, the users can learn to plan, prepare and commit their 
 - Manage commit tasks in separated projects
 - Search for tasks
 - Simple & easy to use
+- Commit and receive commit details
 
 ## Install
 
@@ -119,6 +120,10 @@ $ ct --remove MyProject
 
 - Hung Nguyen <viethungax@gmail.com> ([twitter](https://twitter.com/ZeroX_Hung))
 
-## LICENSE
+## Donate me
+
+<a href="https://www.buymeacoffee.com/hQteV8A" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+
+## License
 
 [MIT](LICENSE.md)
