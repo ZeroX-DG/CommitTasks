@@ -114,3 +114,11 @@ You can do the same thing to delete the whole project, but this time, only proje
 ```
 $ ct --remove MyProject
 ```
+
+## Author
+
+- Hung Nguyen <viethungax@gmail.com> ([twitter](https://twitter.com/ZeroX_Hung))
+
+## LICENSE
+
+[MIT](LICENSE.md)
