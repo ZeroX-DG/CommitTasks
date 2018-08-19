@@ -4,7 +4,8 @@
   Plan & commit your changes with ease :tada:
 </h4>
 
-<div class="center">
+<div align="center">
+  <img src="assets/demo-ct.gif" width="80%" />
 </div>
 
 ## About this project
