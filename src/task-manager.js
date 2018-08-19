@@ -8,7 +8,11 @@ const TaskManager = (flags, input) => {
   }
 
   if (flags.remove) {
-    return api.removeTask(input)
+    if (input.length === 1) {
+      return api.removeProject(input)
+    } else {
+      return api.removeTask(input)
+    }
   }
 
   if (flags.commit) {

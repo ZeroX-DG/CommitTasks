@@ -110,6 +110,19 @@ class TaskAPI {
     render.logSuccess(getMessage(success.REMOVED_TASK, [taskId, project]))
   }
 
+  removeProject (input) {
+    let project = input[0]
+    if (project === '.') {
+      project = path.basename(process.cwd())
+    }
+    if (!this.tasks[project]) {
+      return render.logError(getMessage(errors.INVALID_PROJECT_NAME, project))
+    }
+    delete this.tasks[project]
+    this.save()
+    render.logSuccess(getMessage(success.REMOVED_PROJECT, project))
+  }
+
   /**
    *Commit a task in a project
    *
