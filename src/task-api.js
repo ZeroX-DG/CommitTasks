@@ -258,6 +258,21 @@ class TaskAPI {
     return project
   }
 
+  findTask (input) {
+    const result = {}
+    const term = input.join(' ')
+    const projects = Object.keys(this.tasks)
+    projects.forEach(project => {
+      const currentProject = this.tasks[project]
+      currentProject.forEach(task => {
+        if (task.message.indexOf(term) !== -1) {
+          ;(result[project] = result[project] || []).push(task)
+        }
+      })
+    })
+    return render.drawTaskList(result)
+  }
+
   /**
    *Save the all tasks into the data file
    *
