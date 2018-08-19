@@ -16,6 +16,10 @@
     "book"
   ],
   "author": "Hung Nguyen <viethungax@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ZeroX-DG/CommitTasks.git"
+  },
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.4.1",
