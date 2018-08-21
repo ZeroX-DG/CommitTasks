@@ -4,7 +4,8 @@ const loggers = {
     if (typeof data === 'string') {
       console.log(`${green('◉')} ${data}`)
     } else {
-      const result = `${data.prefix}${green('◉')} ${data.message}${data.suffix}`
+      const result = `${data.prefix || ''}${green('◉')} ${data.message ||
+        ''}${data.suffix || ''}`
       console.log(result)
     }
   },
@@ -12,7 +13,8 @@ const loggers = {
     if (typeof data === 'string') {
       console.log(`✖ ${data}`)
     } else {
-      const result = `${data.prefix}✖ ${data.message}${data.suffix}`
+      const result = `${data.prefix || ''}✖ ${data.message ||
+        ''}${data.suffix || ''}`
       console.log(result)
     }
   },
@@ -20,7 +22,8 @@ const loggers = {
     if (typeof data === 'string') {
       console.log(`${blue('◯')} ${data}`)
     } else {
-      const result = `${data.prefix}${blue('◯')} ${data.message}${data.suffix}`
+      const result = `${data.prefix || ''}${blue('◯')} ${data.message ||
+        ''}${data.suffix || ''}`
       console.log(result)
     }
   },
@@ -28,7 +31,8 @@ const loggers = {
     if (typeof data === 'string') {
       console.log(`${data}`)
     } else {
-      const result = `${data.prefix}${data.message}${data.suffix}`
+      const result = `${data.prefix || ''}${data.message || ''}${data.suffix ||
+        ''}`
       console.log(result)
     }
   }
