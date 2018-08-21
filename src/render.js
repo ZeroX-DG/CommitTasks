@@ -11,7 +11,7 @@ class Render {
     const timeDiff = Math.abs(now.getTime() - taskCreateDate.getTime())
     const diffDays = Math.floor(timeDiff / (1000 * 3600 * 24))
     const displayDay = diffDays ? `${diffDays}d` : 'today'
-    const suffix = `- ${green(displayDay)}`
+    const suffix = ` - ${grey(displayDay)}`
     return { prefix, message, suffix }
   }
 
