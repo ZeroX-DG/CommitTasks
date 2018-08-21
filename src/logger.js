@@ -1,4 +1,4 @@
-const { blue, green } = require('chalk')
+const { blue, green, red } = require('chalk')
 const loggers = {
   success: data => {
     if (typeof data === 'string') {
@@ -11,9 +11,9 @@ const loggers = {
   },
   fatal: data => {
     if (typeof data === 'string') {
-      console.log(`✖ ${data}`)
+      console.log(`${red('✖')} ${data}`)
     } else {
-      const result = `${data.prefix || ''}✖ ${data.message ||
+      const result = `${data.prefix || ''}${red('✖')} ${data.message ||
         ''}${data.suffix || ''}`
       console.log(result)
     }
