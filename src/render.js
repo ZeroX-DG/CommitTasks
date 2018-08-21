@@ -1,5 +1,6 @@
 const { grey, underline, blue, red, green, yellow } = require('chalk')
 const { log, success, pending, fatal } = require('./logger')
+const path = require('path')
 
 class Render {
   _buildTaskMessage (task) {
@@ -65,6 +66,30 @@ class Render {
       } else {
         pending(output)
       }
+    })
+  }
+
+  drawFileList (files) {
+    const tree = []
+    ;[...files].forEach(file => {
+      const parts = file.split(path.sep)
+      let parent = tree
+      parts.forEach((part, index) => {
+        const desiredPath = parent.find(p => p.name === part)
+        if (desiredPath) {
+          parent = desiredPath.children
+        } else {
+          const newPath = { name: part, children: [] }
+          parent.push(newPath)
+          parent = newPath.children
+          if (index === parts.length - 1) {
+            part = yellow(part)
+          } else {
+            part = part + '/'
+          }
+          log({ prefix: ' '.repeat((index + 2) * 2), message: part })
+        }
+      })
     })
   }
 

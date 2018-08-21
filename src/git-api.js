@@ -40,8 +40,38 @@ function isNothingtoCommit () {
   })
 }
 
+function getLastCommitID () {
+  const getLastCommitIDCommand = 'git log --format="%h" -n 1'
+  return new Promise((resolve, reject) => {
+    exec(getLastCommitIDCommand, (error, stdout, stderr) => {
+      if (error) {
+        reject(error)
+      } else {
+        resolve(stdout)
+      }
+    })
+  })
+}
+
+function getLastCommitFiles () {
+  return new Promise((resolve, reject) => {
+    getLastCommitID().then(id => {
+      const getCommitFiles = `git diff-tree --no-commit-id --name-only -r ${id}`
+      exec(getCommitFiles, (error, stdout, stderr) => {
+        if (error) {
+          reject(error)
+        } else {
+          resolve(stdout.split('\n'))
+        }
+      })
+    })
+  })
+}
+
 module.exports = {
   commit,
   getLastCommitDetails,
-  isNothingtoCommit
+  isNothingtoCommit,
+  getLastCommitFiles,
+  getLastCommitID
 }

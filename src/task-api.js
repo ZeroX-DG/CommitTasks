@@ -153,6 +153,9 @@ class TaskAPI {
                   .getLastCommitDetails()
                   .then(detail => {
                     render.log(detail)
+                    git
+                      .getLastCommitFiles()
+                      .then(files => render.drawFileList(files))
                     task.finished = true
                     this.save()
                   })
