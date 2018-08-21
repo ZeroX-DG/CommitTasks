@@ -19,10 +19,10 @@ class Render {
     const projectTitle = yellow(`${project}`)
     const totalCommits = projectContent.length
     const totalFinished = projectContent.filter(task => task.finished).length
-    const projectStats = `${blue(
-      '[' + totalFinished + '/' + totalCommits + ']'
+    const projectStats = `${yellow(
+      '[' + totalFinished + '/' + totalCommits + ' finished]'
     )}`
-    return `  ${yellow('●')} ${underline(projectTitle)} ${projectStats}`
+    return `\n  ${yellow('●')} ${projectTitle} ${projectStats}\n`
   }
 
   drawTaskList (tasks) {
