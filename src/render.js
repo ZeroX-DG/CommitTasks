@@ -1,4 +1,4 @@
-const { grey, underline, blue, red, green } = require('chalk')
+const { grey, underline, blue, red, green, yellow } = require('chalk')
 const { log, success, pending, fatal } = require('./logger')
 
 class Render {
@@ -16,10 +16,13 @@ class Render {
   }
 
   _buildProjectTitle (project, projectContent) {
-    const projectTitle = blue(`@${project}`)
+    const projectTitle = yellow(`${project}`)
     const totalCommits = projectContent.length
     const totalFinished = projectContent.filter(task => task.finished).length
-    return `  ${underline(projectTitle)} [${totalFinished}/${totalCommits}]`
+    const projectStats = `${blue(
+      '[' + totalFinished + '/' + totalCommits + ']'
+    )}`
+    return `  ${yellow('●')} ${underline(projectTitle)} ${projectStats}`
   }
 
   drawTaskList (tasks) {
