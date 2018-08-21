@@ -23,8 +23,7 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.4.1",
-    "meow": "^5.0.0",
-    "signale": "^1.2.1"
+    "meow": "^5.0.0"
   },
   "devDependencies": {
     "eslint": "^5.3.0",

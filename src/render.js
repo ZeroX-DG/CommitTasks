@@ -1,8 +1,5 @@
-const signale = require('signale')
 const { grey, underline, blue, red, green } = require('chalk')
-const { log, success, pending, fatal } = signale
-
-signale.config({ displayLabel: false })
+const { log, success, pending, fatal } = require('./logger')
 
 class Render {
   _buildTaskMessage (task) {
