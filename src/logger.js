@@ -34,8 +34,20 @@ const loggers = {
     if (typeof data === 'string') {
       console.log(`${blue('◯')} ${data}`)
     } else {
-      const result = `${data.prefix || ''}${blue('◯')} ${data.message ||
-        ''}${data.suffix || ''}`
+      const prefix = `${data.prefix || ''}${blue('◯')} `
+      let message = `${data.message || ''}`
+      if (data.highlight) {
+        switch (data.highlight) {
+          case 'urgent':
+            message = `${black.bgYellow(message)}`
+            break
+          case 'important':
+            message = `${black.bgBlue(message)}`
+            break
+        }
+      }
+      const suffix = `${data.suffix || ''}`
+      const result = prefix + message + suffix
       console.log(result)
     }
   },

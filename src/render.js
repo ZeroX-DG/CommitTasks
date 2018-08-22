@@ -44,7 +44,7 @@ class Render {
         if (task.finished) {
           this.logSuccess(output, task.highlight)
         } else {
-          pending(output)
+          this.logPending(output, task.highlight)
         }
       })
     })
@@ -106,8 +106,20 @@ class Render {
     success(message)
   }
 
-  log (message) {
-    log({ prefix: '  ', message: message.trim() })
+  log (message, highlight) {
+    message =
+      typeof message === 'string'
+        ? { prefix: '  ', message: message.trim(), highlight }
+        : Object.assign({}, message, { highlight })
+    log(message)
+  }
+
+  logPending (message, highlight) {
+    message =
+      typeof message === 'string'
+        ? { prefix: '  ', message: message.trim(), highlight }
+        : Object.assign({}, message, { highlight })
+    pending(message)
   }
 }
 
