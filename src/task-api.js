@@ -286,6 +286,9 @@ class TaskAPI {
           getMessage(errors.NO_TASK_IN_PROJECT, [taskId, project])
         )
       }
+      if (!status) {
+        return render.logError(getMessage(errors.NO_HIGHLIGHT_STATUS))
+      }
       const task = this.tasks[project].find(task => task.id === taskId)
       task.highlight = status
       this.save()

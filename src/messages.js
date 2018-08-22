@@ -3,7 +3,8 @@ const errors = {
   INVALID_TASK_ID_TYPE: 'Task id is not a number',
   NO_TASK_IN_PROJECT: 'There is no task with the id %s in %s',
   COMMIT_FINISHED_TASK: "You can't commit a finished task",
-  NOTHING_TO_COMMIT: 'No changes to commit!'
+  NOTHING_TO_COMMIT: 'No changes to commit!',
+  NO_HIGHLIGHT_STATUS: 'You have to specify a highlight status'
 }
 
 const success = {
