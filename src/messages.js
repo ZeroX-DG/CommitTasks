@@ -4,7 +4,8 @@ const errors = {
   NO_TASK_IN_PROJECT: 'There is no task with the id %s in %s',
   COMMIT_FINISHED_TASK: "You can't commit a finished task",
   NOTHING_TO_COMMIT: 'No changes to commit!',
-  NO_HIGHLIGHT_STATUS: 'You have to specify a highlight status'
+  NO_HIGHLIGHT_STATUS: 'You have to specify a highlight status',
+  INVALID_HIGHLIGHT_STATUS: 'The specified highlight status is not defined'
 }
 
 const success = {
