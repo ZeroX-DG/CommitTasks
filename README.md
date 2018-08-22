@@ -19,6 +19,7 @@ With just a few examples, the users can learn to plan, prepare and commit their 
 - Search for tasks
 - Simple & easy to use
 - Commit and receive commit details
+- Highlight tasks
 
 ## Install
 
@@ -100,6 +101,19 @@ As you all know, the task content will be used as the commit message, so if you 
 
 ```
 $ ct --edit MyProject 1 Changed to new message
+```
+
+### Highlight a task
+
+To highlight a task, you can use the flag `--highlight`/`--hl` followed by the project name, task id and the status of the highlight that you want.
+Supported status:
+
+- `urgent`
+- `important`
+- `none`
+
+```
+$ ct --highlight MyProject 1 urgent
 ```
 
 ### Remove a task or project
