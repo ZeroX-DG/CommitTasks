@@ -42,7 +42,7 @@ class Render {
       currentProject.forEach(task => {
         const output = this._buildTaskMessage(task)
         if (task.finished) {
-          success(output)
+          this.logSuccess(output, task.highlight)
         } else {
           pending(output)
         }
@@ -98,8 +98,12 @@ class Render {
     fatal({ prefix: '  ', message: `${red(error)}` })
   }
 
-  logSuccess (message) {
-    success({ prefix: '  ', message: green(message) })
+  logSuccess (message, highlight) {
+    message =
+      typeof message === 'string'
+        ? { prefix: '  ', message: green(message), highlight }
+        : Object.assign({}, message, { highlight })
+    success(message)
   }
 
   log (message) {
