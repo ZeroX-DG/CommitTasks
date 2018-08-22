@@ -31,6 +31,10 @@ const TaskManager = (flags, input) => {
     return api.findTask(input)
   }
 
+  if (flags.highlight) {
+    return api.highlight(input)
+  }
+
   return api.drawTaskList()
 }
 

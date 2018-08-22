@@ -276,6 +276,25 @@ class TaskAPI {
     return render.drawTaskList(result)
   }
 
+  highlight (input) {
+    const project = this.getProject(input)
+    if (project) {
+      const taskId = parseInt(input[1])
+      const status = input[2]
+      if (!this.tasks[project].some(task => task.id === taskId)) {
+        return render.logError(
+          getMessage(errors.NO_TASK_IN_PROJECT, [taskId, project])
+        )
+      }
+      const task = this.tasks[project].find(task => task.id === taskId)
+      task.highlight = status
+      this.save()
+      render.logSuccess(
+        getMessage(success.HIGHLIGHTED_TASK, [taskId, project, status])
+      )
+    }
+  }
+
   /**
    *Save the all tasks into the data file
    *

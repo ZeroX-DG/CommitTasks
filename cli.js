@@ -40,6 +40,10 @@ const cli = meow(help, {
     create: {
       type: 'boolean',
       alias: 'cp'
+    },
+    highlight: {
+      type: 'boolean',
+      alias: 'hl'
     }
   }
 })

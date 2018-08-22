@@ -11,7 +11,8 @@ const success = {
   CREATED_TASK: 'Created task %s',
   COMITTED_TASK: 'Commited task %s in %s',
   EDITTED_TASK: 'Changed message to -> %s',
-  REMOVED_PROJECT: 'Removed project %s'
+  REMOVED_PROJECT: 'Removed project %s',
+  HIGHLIGHTED_TASK: 'Highlighted task %s in %s with status %s'
 }
 
 function getMessage (message, data) {
