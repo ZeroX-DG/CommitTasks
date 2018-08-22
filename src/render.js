@@ -62,9 +62,9 @@ class Render {
     projectTasks.forEach(task => {
       const output = this._buildTaskMessage(task)
       if (task.finished) {
-        success(output)
+        this.logSuccess(output, task.highlight)
       } else {
-        pending(output)
+        this.logPending(output, task.highlight)
       }
     })
   }
