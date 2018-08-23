@@ -129,7 +129,7 @@ class TaskAPI {
    * @param {*} input
    * @memberof TaskAPI
    */
-  commitTask (input) {
+  commitTask (input, withCustomFiles) {
     const project = input[0]
     let taskId = input[1]
     const task = this.getTask(project, taskId)
@@ -143,6 +143,11 @@ class TaskAPI {
           if (nothingToCommit) {
             render.logError(getMessage(errors.NOTHING_TO_COMMIT))
           } else {
+            if (withCustomFiles) {
+              git.addFiles(input.slice(2))
+            } else {
+              git.addFiles('.')
+            }
             git
               .commit(task.message)
               .then(() => {

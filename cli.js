@@ -44,6 +44,10 @@ const cli = meow(help, {
     highlight: {
       type: 'boolean',
       alias: 'hl'
+    },
+    files: {
+      type: 'boolean',
+      alias: 'cf'
     }
   }
 })

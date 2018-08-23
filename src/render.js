@@ -70,6 +70,7 @@ class Render {
   }
 
   drawFileList (files) {
+    log({ prefix: '  ', message: 'Commited files:' })
     const tree = []
     ;[...files].forEach(file => {
       const parts = file.split(path.sep)

@@ -16,7 +16,7 @@ const TaskManager = (flags, input) => {
   }
 
   if (flags.commit) {
-    return api.commitTask(input)
+    return api.commitTask(input, flags.files)
   }
 
   if (flags.list) {

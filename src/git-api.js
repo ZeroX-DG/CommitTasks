@@ -13,6 +13,20 @@ function commit (message) {
   })
 }
 
+function addFiles (files) {
+  files = typeof files === 'string' ? [files] : files
+  const commitCommand = `git add ${files.join(' ')}`
+  return new Promise((resolve, reject) => {
+    exec(commitCommand, (error, stdout, stderr) => {
+      if (error) {
+        reject(error)
+      } else {
+        resolve()
+      }
+    })
+  })
+}
+
 function getLastCommitDetails () {
   const getOutputCommand =
     'git log --format="%Cgreen%h%Creset %s %C(bold blue)<%an>%Creset" -n 1'
@@ -70,6 +84,7 @@ function getLastCommitFiles () {
 
 module.exports = {
   commit,
+  addFiles,
   getLastCommitDetails,
   isNothingtoCommit,
   getLastCommitFiles,
