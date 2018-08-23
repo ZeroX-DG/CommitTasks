@@ -12,6 +12,7 @@ module.exports = `
       --edit, -e         Edit a task commit's message
       --create, --cp     Create project for a task (use along with --task)
       --highlight, --hl  Highlight add task with a status
+      --files            Used with --commit to specify files to be commited
 
     Examples:
       $ ct
@@ -30,4 +31,5 @@ module.exports = `
       $ ct --highlight . 2 urgent
       $ ct --highlight . 2 important
       $ ct --highlight . 2 none
+      $ ct --commit . 2 --files index.js src/main.jsx
 `

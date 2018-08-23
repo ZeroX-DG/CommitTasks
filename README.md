@@ -87,6 +87,12 @@ After you apply all your changes, you can use the flag `--commit`/`--c` followed
 $ ct --commit MyProject 1
 ```
 
+By default if no files is specified, `git add .` will automatically called. However, if you want to specify a set files that need to be commit, you can combine the `--commit`/`--c` flag with `--files`/`--cf` flag to specify files that you want to commit
+
+```
+$ ct --commit MyProject 1 --files index.js css/index.css index.html
+```
+
 ### List all task in a project
 
 If you're working on a specific project and only wish to see tasks in that project, then you can use the `--list`/`--l` flag with a project name to show only tasks in your desired project.
