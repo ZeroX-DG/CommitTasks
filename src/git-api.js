@@ -1,7 +1,7 @@
 const exec = require('child_process').exec
 
 function commit (message) {
-  const commitCommand = `git add . && git commit -m "${message}"`
+  const commitCommand = `git commit -m "${message}"`
   return new Promise((resolve, reject) => {
     exec(commitCommand, (error, stdout, stderr) => {
       if (error) {
