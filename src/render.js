@@ -1,10 +1,11 @@
 const { grey, underline, blue, red, green, yellow } = require('chalk')
 const { log, success, pending, fatal } = require('./logger')
 const path = require('path')
+const { pad, getMaxIdLength } = require('./util')
 
 class Render {
-  _buildTaskMessage (task) {
-    const id = `${task.id}.`
+  _buildTaskMessage (task, maxIdLength) {
+    const id = pad(`${task.id}.`, maxIdLength)
     const prefix = `    ${grey(id)} `
     const message = task.finished ? grey(task.message) : task.message
     const taskCreateDate = new Date(task.createAt)
@@ -39,8 +40,9 @@ class Render {
     projects.forEach(project => {
       const currentProject = tasks[project]
       log(this._buildProjectTitle(project, tasks[project]))
+      const maxIdLength = getMaxIdLength(currentProject)
       currentProject.forEach(task => {
-        const output = this._buildTaskMessage(task)
+        const output = this._buildTaskMessage(task, maxIdLength)
         if (task.finished) {
           this.logSuccess(output, task.highlight)
         } else {
@@ -59,8 +61,9 @@ class Render {
       })
     }
     log(this._buildProjectTitle(project, projectTasks))
+    const maxIdLength = getMaxIdLength(projectTasks)
     projectTasks.forEach(task => {
-      const output = this._buildTaskMessage(task)
+      const output = this._buildTaskMessage(task, maxIdLength)
       if (task.finished) {
         this.logSuccess(output, task.highlight)
       } else {
