@@ -1,6 +1,6 @@
 {
   "name": "committasks",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A commit task book for developer",
   "main": "index.js",
   "scripts": {
