@@ -76,7 +76,7 @@ $ ct --task MyProject Updated README with the new details
 If the project that you are about to create does not exist then you must specify the flag `--create`/`--cp` for CommitTasks to understand that you want to create a new project.
 
 ```
-$ ct --task ProjectToBeCreateded Improve documentation --create
+$ ct --task ProjectToBeCreated Improve documentation --create
 ```
 
 ### Commit a task
