@@ -15,7 +15,7 @@ With just a few examples, the users can learn to plan, prepare and commit their 
 
 ## Features
 
-- Manage commit tasks in separated projects
+- Manage commit tasks in separate projects
 - Search for tasks
 - Simple & easy to use
 - Commit and receive commit details
@@ -43,7 +43,7 @@ $ ct --help
       --list, -l        Display all tasks in a project
       --find, -f        Search for a task
       --edit, -e        Edit a task commit's message
-      --create, -cp     Create project for a task (use along with --task)
+      --create, -cp     Create a project for a task (requires --task)
 
     Examples:
       $ ct
@@ -58,12 +58,12 @@ $ ct --help
       $ ct --edit MyProject 2 New message
       $ ct --edit . 2 New message
       $ ct --task NotExistProject Fix issue #45 --create
-      $ ct --create --task NotExistProject Fix issue #45
+      $ ct --create --task NewProject Fix issue #45
 ```
 
 ## How to use
 
-In all the example bellow, if your current working directory has the same name as your project name in CommitTasks list then you can replace your project name with a `.` character.
+In all the examples bellow, if your current working directory has the same name as your project name in CommitTasks list then you can replace your project name with a `.` character.
 
 ### Create task
 
@@ -73,10 +73,10 @@ You can use `--task`/`-t` flag to create a new task.
 $ ct --task MyProject Updated README with the new details
 ```
 
-If the project that you about to create is not exists then you have to specify the flag `--create`/`--cp` for CommitTasks to understand that you want to create a new project and not that you're having a typo in your project name.
+If the project that you are about to create does not exist then you must specify the flag `--create`/`--cp` for CommitTasks to understand that you want to create a new project.
 
 ```
-$ ct --task ProjectThatNotExisted Improve documentation --create
+$ ct --task ProjectToBeCreated Improve documentation --create
 ```
 
 ### Commit a task
@@ -87,7 +87,7 @@ After you apply all your changes, you can use the flag `--commit`/`--c` followed
 $ ct --commit MyProject 1
 ```
 
-By default if no files is specified, `git add .` will automatically called. However, if you want to specify a set files that need to be commit, you can combine the `--commit`/`--c` flag with `--files`/`--cf` flag to specify files that you want to commit
+If no files are specified, `git add .` will be assumed. However, if you want to specify a set files to be commited, you can combine the `--commit`/`--c` flag with `--files`/`--cf` flag to specify the files that you want to commit.
 
 ```
 $ ct --commit MyProject 1 --files index.js css/index.css index.html
@@ -103,10 +103,10 @@ $ ct --list MyProject
 
 ### Edit a task commit message
 
-As you all know, the task content will be used as the commit message, so if you wish to change it, use the `--edit`/`--e` flag followed by the project name, task id and the new message.
+As mentioned earlier, the task content will be used as the commit message by default. If you wish to change it, use the `--edit`/`--e` flag followed by the project name, task id and the new message.
 
 ```
-$ ct --edit MyProject 1 Changed to new message
+$ ct --edit MyProject 1 Updated commit message
 ```
 
 ### Highlight a task
@@ -140,7 +140,7 @@ $ ct --remove MyProject
 
 - Hung Nguyen <viethungax@gmail.com> ([twitter](https://twitter.com/ZeroX_Hung))
 
-## Donate me
+## Donations
 
 <a href="https://www.buymeacoffee.com/hQteV8A" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
